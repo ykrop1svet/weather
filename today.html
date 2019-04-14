@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+  <title>Weather</title>
+</head>
+<body>
+
+<style>
+section{
+  width: 100%;
+  height: 100vh;
+  background: radial-gradient(at top, #FFA9A1, #A7CECC);
+  font-family: 'Oswald', sans-serif;
+  
+}
+
+.container{
+  padding-top: 10%;
+  text-align: center;
+  width: 25%;
+}
+
+.card{
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.content_weather{
+  font-size: 20px;
+}
+
+h1{
+  padding: 15px;
+}
+
+@keyframes clouds-loop-1 {
+  to {
+    background-position: -1000px 0;
+  }
+}
+ 
+.clouds-1 {
+  background-image: url("/img/clouds_2.png");
+  animation: clouds-loop-1 30s infinite linear;
+}
+ 
+@keyframes clouds-loop-2 {
+  to {
+    background-position: -1000px 0;
+  }
+}
+ 
+.clouds-2 {
+  background-image: url("/img/clouds_1.png");
+  animation: clouds-loop-2 35s infinite linear;
+}
+ 
+@keyframes clouds-loop-3 {
+  to {
+    background-position: -1579px 0;
+  }
+}
+ 
+.clouds-3 {
+  background-image: url("/img/clouds_3.png");
+  animation: clouds-loop-3 40s infinite linear;
+}
+ 
+.clouds {
+  opacity: 0.4;
+  pointer-events: none;
+  position: absolute;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+}
+ 
+.clouds-1,
+.clouds-2,
+.clouds-3 {
+  background-repeat: repeat-x;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 500px;
+}
+</style>
+
+<section>
+
+  
+<div class='clouds'>
+    <div class='clouds-1'></div>
+    <div class='clouds-2'></div>
+    <div class='clouds-3'></div>
+    </div>
+
+
+    <h1>Weather in RND today</h1>
+  <div class="container">
+    <div class="card">
+        <h2 class="card-header">Weather in Rostov-on-Don</h2>
+        <p>14.04.2019 вс</p>
+        <div class="card-body">
+            <div id="weather"></div>
+        </div>
+    </div>
+    
+  </div>
+
+</section>
+
+<script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
+<script>
+
+$(document).ready(function(){
+    $.get(
+        "https://api.openweathermap.org/data/2.5/weather",
+        {
+            "id" : 501175,
+            "appid": "70e1ed322b02acbc57d443dd91065f3e"
+        },
+        
+        function (data) {
+            let out='';
+                out +='<p class="content_weather">Temperature: <b>'+Math.round(data.main.temp-273)+'&#176;C</b></p>';
+                out +='<p class="content_weather"><img src="https://api.openweathermap.org/img/w/'+data.weather[0].icon+'.png"></p>';
+                out +='<p class="content_weather">Weather: <b>'+data.weather[0].main+'</b></p>';
+            console.log(data.main);
+          $('#weather').html(out);
+        }
+  )
+});
+
+
+</script>
+</body>
+</html>
