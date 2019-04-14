@@ -177,7 +177,7 @@ h1{
               html += `<div class="col-sm-4"><div class="card card-outline-secondary"><div class="card-body">
                 <h3 class="card-title">Weather for ${forecast.city.name}, ${forecast.city.country}</h3>
                 <p>Date: ${forecastEntry.dt_txt}</p>
-                <p>Temperature: ${forecastEntry.main.temp}</p>
+                <p>Temperature: ${forecastEntry.main.temp}&#176;C</p>
                 <p><img src="https://api.openweathermap.org/img/w/`+forecastEntry.weather[0].icon+`.png"></p>
                 <p>Weather: ${forecastEntry.weather[0].main}</p></div></div></div>`
             // html +='<p>Date: <b>'+forecastEntry.dt_txt+'</b></p>';
